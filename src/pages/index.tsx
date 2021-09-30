@@ -1,49 +1,30 @@
-import Head from "next/head";
-import Page from "../components/shared/composers/page";
+import Page from "../components/shared/layout/page";
 import { useRouter } from "next/router";
-import Container from "../components/shared/composers/container";
-import Flex from "../components/shared/composers/flex";
-import Paragraph from "../components/shared/text/paragraph";
 import React from "react";
-import Heading from "../components/shared/text/heading";
-import TextButton from "../components/shared/button/text-button";
-import { Formik } from "formik";
+import { Container, Flex, Stack } from "@chakra-ui/layout";
+import { useTranslation } from "react-i18next";
+import Paragraph from "../components/shared/typography/paragraph";
+import Heading from "../components/shared/typography/heading";
+import InputField from "../components/shared/form/input-field";
+import { Form, Formik } from "formik";
+import Button from "../components/shared/actions/button";
 
 export default function Home() {
 	// Attributes
 	const router = useRouter();
+	const { t } = useTranslation();
 
 	return (
-		<Page>
-			<Flex type="col" align="center" justify="center">
-				<Container fitHeight type="3xl" className="bg-white p-6 flex rounded-xl">
-					<Flex type="col" align="start" justify="start">
-						<Container>
-							<Heading type={1}>Welcome 👋</Heading>
-							<Paragraph className="font-light">Please Sign In to continue</Paragraph>
-						</Container>
-						<Container fitHeight className="pt-8">
-							{/* <TextInput 
-                placeholder="Insert your e-mail address"
-                label="E-mail address" 
-              />
-              <TextInput 
-                className="mt-4"
-                placeholder="Insert your password"
-                label="Password" 
-              /> */}
-						</Container>
-						<Container fitHeight className="mt-8">
-							<TextButton text="Sign In" />
-						</Container>
-						<Container fitHeight className="pt-12">
-							<Flex justify="center" align="center">
-								<Paragraph>You don't have an account?</Paragraph>
-							</Flex>
-						</Container>
-					</Flex>
-				</Container>
-			</Flex>
-		</Page>
+		<Formik<any> initialValues={{ tahir: "0494903665" }} onSubmit={(data) => alert(data.tahir)}>
+			<Form>
+				<Page p={4}>
+					<Stack spacing={4}>
+						<InputField placeholder="Numéro de téléphone" name="tahir" />
+						<InputField type="password" placeholder="Mot de passe" name="tahir" />
+						<Button type="submit" text="Se connecter" />
+					</Stack>
+				</Page>
+			</Form>
+		</Formik>
 	);
 }
