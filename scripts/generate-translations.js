@@ -143,37 +143,16 @@ function urlError() {
 function generateIndexFile(languages, env) {
 	const content = `import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-${Object.keys(languages).map((accro) => {
-	return `import ${accro} from "./${accro}.json";\n`;
-})}
+import { i18nConfig } from './config';
+${Object.keys(languages)
+	.map((accro) => {
+		return `import ${accro} from "./${accro}.json";`;
+	})
+	.join('\n')}
+
 const locales = ({ ${Object.keys(languages).join(
 		', ',
 	)} } as unknown) as Record<string, Record<string, string>>;
-    
-interface IConfig {
-    api: {
-        backend?: string;
-        iam?: string;
-    };
-    i18n: {
-        defaultLanguage?: string;
-        availableLanguages?: string[];
-    };
-}
-    
-const config: IConfig = {
-    api: {
-        backend: process.env.NEXT_PUBLIC_BACKEND_URL,
-        iam: process.env.NEXT_PUBLIC_IAM_URL,
-    },
-    i18n: {
-        defaultLanguage: process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE,
-        availableLanguages: process.env.NEXT_PUBLIC_AVAILABLE_LANGUAGES?.split(
-            ',',
-        ).map((language) => language.trim().toLowerCase()),
-    },
-};
-
 
 const getResources = (languages?: string[]) => {
     return languages?.reduce(
@@ -191,9 +170,9 @@ const getResources = (languages?: string[]) => {
 
 export const getI18nInstance = () => {
     i18n.use(initReactI18next).init({
-        lng: config.i18n.defaultLanguage,
-        fallbackLng: config.i18n.defaultLanguage,
-        resources: getResources(config.i18n.availableLanguages),
+        lng: i18nConfig.defaultLanguage,
+        fallbackLng: i18nConfig.defaultLanguage,
+        resources: getResources(i18nConfig.availableLanguages),
         keySeparator: false,
         returnEmptyString: false,
     });
