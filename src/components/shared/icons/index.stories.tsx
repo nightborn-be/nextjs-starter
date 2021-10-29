@@ -1,17 +1,14 @@
-import React from "react";
-import { Story, Meta } from "@storybook/react";
-import { Box, Container, Flex } from "@chakra-ui/layout";
-import Heading from "../typography/heading";
-import Loupe from "./loupe";
-import Icons from ".";
-import { COLORS } from "../../../constants/colors";
-import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
-import Paragraph from "../typography/paragraph";
-import { FONT_SIZES } from "../../../constants/typography";
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
+import { Box } from '@chakra-ui/layout';
+import Heading from '../typography/heading';
+import Icons from '.';
+import { COLORS } from '../../../constants/colors';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table';
 
 const Demo = () => {
 	return (
-		<Box maxW={"500px"}>
+		<Box maxW="31.25rem">
 			<Heading>Icons</Heading>
 			<Table mt={5}>
 				<Thead>
@@ -22,9 +19,22 @@ const Demo = () => {
 				</Thead>
 				<Tbody>
 					{Object.keys(Icons).map((icon, index) => (
-						<Tr background={index % 2 == 0 ? COLORS.WHITE.hex : COLORS.GREY.T100.hex}>
+						<Tr
+							key={`tr_${index}`}
+							background={
+								index % 2 == 0
+									? COLORS.WHITE.hex
+									: COLORS.GREY.T100.hex
+							}
+						>
 							<Td>{icon}</Td>
-							<Td>{Icons[icon]({ height: 24, width: 24, fill: COLORS.GREY.T500.hex })}</Td>
+							<Td>
+								{Icons[icon]({
+									height: 24,
+									width: 24,
+									fill: COLORS.GREY.T500.hex,
+								})}
+							</Td>
 						</Tr>
 					))}
 				</Tbody>
@@ -35,7 +45,7 @@ const Demo = () => {
 
 export default {
 	component: Demo,
-	title: "Foundations/Icons",
+	title: 'Foundations/Icons',
 } as Meta;
 
 //👇 We create a “template” of how args map to rendering

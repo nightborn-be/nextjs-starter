@@ -1,16 +1,16 @@
-import Head from "next/head";
-import { Router, useRouter } from "next/router";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+    // Attributes
+    const router = useRouter();
 
-  // Attributes
-  const router = useRouter();
-
-  return (
-    <>
-      <Head>
-        <title>You're lost</title>
-      </Head>
-    </>
-  )
+    //Render
+    return (
+        <>
+            <Head>
+                <title>{"You're lost"}</title>
+            </Head>
+        </>
+    );
 }
